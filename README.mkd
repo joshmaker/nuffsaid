@@ -1,0 +1,89 @@
+# Nuffsaid Sample
+
+Can be installed with `pip install -e git+git@github.com:joshmaker/nuffsaid.git#egg=nuffsaid`.
+Once installed, two cli commands will become available in the currently active
+virtual environment.
+
+Note: The first time this application is run, it will automatically download
+the required CSV file for subsequent use.
+
+## Notes on libraries
+
+A few different Python standard libraries are used to download and unzip the CSV
+file the first time this application is run, and `argparse` is used to make a
+nice CLI. 
+
+Once the CSV file exists locally, `csv` and `time` are the only libraries called
+by the `print_counts` and `search_schools` functions. A non-toy version of this
+repo would use `pandas` and one of the fuzzy search library available for Python
+(`jellyfish`, `fuzzywuzzy`, `python-levenshtein`, etc). This repo doesn't use
+fuzzy search, and as a result, it's search results are... ¯\_(ツ)_/¯.
+
+## CLI Interface
+
+```
+$ count_schools
+Total Schools: 34,779
+
+Schools by State:
+ AL:  1,606
+ AK:    525
+ AZ:  2,147
+ AR:  1,174
+ CA:  9,969
+ OR:      1
+ NV:      1
+ CO:  1,730
+ CT:  1,120
+ DE:    238
+ DC:    229
+ MD:      1
+  C:      1
+ FL:  4,379
+ GA:  2,513
+ HI:    285
+ ID:    730
+ IL:  4,533
+ IN:  2,031
+ OH:      1
+ IA:  1,565
+
+Schools by Metro-centric locale:
+  3:  8,180
+  7:  4,276
+  4:  3,829
+  8:  4,291
+  1:  4,862
+  6:  2,592
+  2:  5,383
+  N:  1,096
+  5:    270
+
+City with most schools: CHICAGO (657)
+Unique cities with at least one school: 4,852
+```
+
+```
+$ search_schools "jefferson belleville"
+Results for "jefferson belleville" (search took: 0.193s)
+ 1. JEFFERSON ELEM SCHOOL
+    BELLEVILLE, IL
+ 2. JEFFERSON COUNTY COUNSELING LEARNING CENTER-EAST
+    BIRMINGHAM, AL
+ 3. WEST JEFFERSON ELEMENTARY SCHOOL
+    QUINTON, AL
+ 4. JEFFERSON COUNTY IBS
+    IRONDALE, AL
+ 5. JEFFERSON COUNTY COUNS AND LEARNING CTR-WEST
+    HUEYTOWN, AL
+ 6. NORTH JEFFERSON MIDDLE SCHOOL
+    KIMBERLY, AL
+ 7. JEFFERSON DAVIS HIGH SCHOOL
+    MONTGOMERY, AL
+ 8. THOMAS JEFFERSON HIGH SCHOOL
+    PHOENIX, AZ
+ 9. JEFFERSON ACADEMY OF ADVANCED LEARNING
+    SHOW LOW, AZ
+10. JEFFERSON ELEMENTARY SCHOOL
+    MESA, AZ
+```
